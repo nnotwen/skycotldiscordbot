@@ -38,8 +38,8 @@ exports.timedEvents = {
     skater: {
         name: 'Dreams Skater Event',
         interval: { hours: 2 },
-        offset: { hours: 1, minutes: 5 },
-        duration: { minutes: 10 },
+        offset: { hours: 1 },
+        duration: { minutes: 15 },
         maximumReward: 140,
         location: "Valley of Triumph > Village of Dreams > Ice Rink",
         imageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images/a/a4/Wax-social-light-valley-village-dreams-skater.png",

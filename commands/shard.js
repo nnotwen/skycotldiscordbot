@@ -183,7 +183,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setAuthor({ 
-                name: `${capitalizeFirstLetter(shard.date.setZone(process.env.TIME_ZONE).toRelativeCalendar())}, ${shard.date.toLocaleString(DateTime.DATE_FULL)}`,
+                name: `${capitalizeFirstLetter(shard.occurences[0].land.setZone(process.env.TIME_ZONE).toRelativeCalendar())}, ${shard.occurences[0].land.toLocaleString(DateTime.DATE_FULL)}`,
                 iconURL: `https://static.wikia.nocookie.net/sky-children-of-the-light/images/3/${shard.isRed ? "32/Red-shard-map-icon" : "38/Black-shard-map-icon"}-Ray.png`,
             })
             .setColor(shard.isRed ? 0xd9544d : 0xafeeee)

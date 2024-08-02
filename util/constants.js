@@ -10,6 +10,9 @@ exports.timedEvents = {
         interval: { hours: 2 },
         offset: { minutes: 5 },
         duration: { minutes: 10 },
+        maximumReward: 350,
+        location: "Daylight Prairie > Sanctuary Islands",
+        imageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images/b/bd/Wax-prairie-sanctuary-days-of-nature-2021.jpg",
         url: "https://sky-children-of-the-light.fandom.com/wiki/Additional_Light_Sources#Polluted_Geyser",
     },
     grandma: {
@@ -17,6 +20,9 @@ exports.timedEvents = {
         interval: { hours: 2 },
         offset: { minutes: 35 },
         duration: { minutes: 10 },
+        maximumReward: 540,
+        location: "Hidden Forest > Elevated Clearing > Ancestor’s Table of Belonging",
+        imageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images/e/ea/Wax-social-light-grandma-dinner.jpg",
         url: "https://sky-children-of-the-light.fandom.com/wiki/Additional_Light_Sources#Grandma's_Dinner_Event",
     },
     turtle: {
@@ -24,15 +30,24 @@ exports.timedEvents = {
         interval: { hours: 2 },
         offset: { minutes: 50 },
         duration: { minutes: 10 },
+        maximumReward: 337,
+        location: "Daylight Prairie > Sanctuary Islands",
+        imageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images/1/1d/Wax-social-light-prairie-sanctuary-turtle.png",
         url: "https://sky-children-of-the-light.fandom.com/wiki/Additional_Light_Sources#Sunset_Sanctuary_Turtle"
     },
     skater: {
         name: 'Dreams Skater Event',
         interval: { hours: 2 },
-        offset: { hours: 1 },
-        duration: { minutes: 15 },
+        offset: { hours: 1, minutes: 5 },
+        duration: { minutes: 10 },
+        maximumReward: 140,
+        location: "Valley of Triumph > Village of Dreams > Ice Rink",
+        imageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images/a/a4/Wax-social-light-valley-village-dreams-skater.png",
         url: "https://sky-children-of-the-light.fandom.com/wiki/Additional_Light_Sources#Dreams_Skater"
-    }
+    },
+    "eden-reset": {
+        url: "https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/faq/590-what-is-eye-of-eden/"
+    },
 }
 
 exports.skyRealms = {

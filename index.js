@@ -8,7 +8,9 @@ const { Client, Events, GatewayIntentBits, Collection, ActivityType } = require(
 
 const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
     ],
     presence: {
         status: 'dnd',

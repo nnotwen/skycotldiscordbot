@@ -201,7 +201,7 @@ module.exports = {
             .setFooter({ text: "Credits: PlutoyDev, Clement" });
 
         const button = new ButtonBuilder()
-        .setLabel("❔ What's this?")
+        .setLabel("What's this?")
         .setStyle(ButtonStyle.Link)
         .setURL('https://sky-children-of-the-light.fandom.com/wiki/Shard_Eruptions');
 

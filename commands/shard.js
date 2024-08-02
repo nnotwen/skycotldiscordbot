@@ -195,7 +195,7 @@ module.exports = {
             )
             .addFields(shard.occurences.map((occurence, i) => ({
                 inline: true,
-                name: ["First", "Second", "Third"][i] + " shard",
+                name: ["First", "Second", "Last"][i] + " shard",
                 value: `<t:${occurence.land.toUnixInteger()}:T> - <t:${occurence.end.toUnixInteger()}:T>`,
             })))
             .setFooter({ text: "Credits: PlutoyDev, Clement" });

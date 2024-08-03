@@ -53,7 +53,7 @@ module.exports = {
             seconds = interval - (fromNow % interval);
             elapsed = Duration.fromObject(evt[subcommand].duration ?? {}).plus({ seconds }).as("seconds") - interval;
 
-            if (subcommand === "skater"){
+            if (subcommand === "skater" && time.weekday < 6){
                 seconds += Duration.fromObject({ day: 5 - time.weekday }).as('seconds');     
             };
         };
@@ -77,16 +77,14 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: "Social Light Timed Events" })
+            .setThumbnail(evt[subcommand].imageURL)
+            .setTitle(evt[subcommand].name)
             .setDescription(description)
-            .setColor(0xafeeee);
-
-        if (subcommand !== "eden-reset"){
-            embed.setThumbnail(evt[subcommand].imageURL).setTitle(evt[subcommand].name).addFields(
+            .setColor(0xafeeee).addFields(
                 { name: "Location", value: evt[subcommand].location },
                 { name: "Maximum rewards on first attempt", value: `${Number((evt[subcommand].maximumReward / 50).toFixed(2))} Candle Cakes worth of wax.` },
                 { name: "Note", value: `Event limits may apply ([?](${evt[subcommand].url})).`}
             );
-        };
 
         return interaction.reply({
             embeds: [ embed ],

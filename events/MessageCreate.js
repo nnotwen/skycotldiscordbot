@@ -1,6 +1,7 @@
 'use strict';
 
 const { Events } = require('discord.js');
+const { DateTime } = require('luxon');
 
 module.exports = {
     name: Events.MessageCreate,
@@ -10,8 +11,15 @@ module.exports = {
         if (!message.content.startsWith("!")) return;
 
         const tag = message.content.slice(1);
+
+        if (['skytime', 'skyclock'].includes(tag)){
+            return message.channel.send([
+                `**Current Sky time**: ${DateTime.now().setZone('America/Los_Angeles').toLocaleString(DateTime.TIME_WITH_SHORT_OFFSET)}.`,
+                `**Current Local time**: <t:${DateTime.now().toUnixInteger()}:T>`,
+            ].join("\n"));
+        }
         
-        if (tag === "chevron"){
+        if (['chevron', 'chevy', 'chevvy'].includes(tag)){
             return message.channel.send([
                 "Chevron are the arrow like icons (^) embedded in your candle meter. Each player will begin the day (sky time) with three chevrons. The number of chevrons will be reduced by one when 5, 10, and 15 candles worth of wax are collected. When 20 candles worth of wax are collected, the candle meter will turn gray. Chevron will reset alongside the daily reset.",
                 "",

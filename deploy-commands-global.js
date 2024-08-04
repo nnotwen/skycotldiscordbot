@@ -6,7 +6,7 @@ const { readdirSync } = require('node:fs');
 const { join } = require('node:path');
 
 const commands = [];
-const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+const rest = new REST().setToken(process.env.DISCORD_TOKEN_PROD);
 
 const jsfilter = f => f.split('.').pop() === 'js';
 for (const commandName of readdirSync(join(__dirname, 'commands')).filter(jsfilter)){
@@ -24,7 +24,7 @@ for (const commandName of readdirSync(join(__dirname, 'commands')).filter(jsfilt
         console.log(`[INFO] Started refreshing ${commands.length} application (/) commands.`);
 
         const data = await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID),
+            Routes.applicationCommands(process.env.CLIENT_ID_PROD),
             { body: commands },
         )
 

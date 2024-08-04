@@ -2,26 +2,26 @@
 
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, } = require('discord.js');
 const { DateTime, Duration, Interval,  } = require('luxon');
-const { skyMaps, skyRealms, mapVarients } = require('../util/constants.js');
+const { skyMaps, skyRealms, } = require('../util/constants.js');
 const moment = require('moment');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('shard')
-        .setDescription('Gives detailed description of the current/next shard event.')
+        .setDescription('Gives detailed description of the shard eruption event.')
         .addSubcommand(subcommand => subcommand
             .setName('red')
-            .setDescription('Gives detailed description of the current/next red shard event.')
+            .setDescription('Gives basic info on current/upcoming red shard (strong eruption) event.')
         )
         .addSubcommand(subcommand => subcommand
             .setName('black')
-            .setDescription('Gives detailed description of the current/next black shard event.')
+            .setDescription('Gives basic info on current/upcoming black shard (regular eruption) event.')
         )
         .addSubcommand(subcommand => subcommand
             .setName('upcoming')
-            .setDescription('Gives detailed description of the current/next shard event.')
+            .setDescription('Gives basic info on current/upcoming shard eruption event.')
         ),
-    execute: (client, interaction) => {
+    execute: (_client, interaction) => {
 
         // Credits --->
         // https://github.com/PlutoyDev/sky-shards/blob/production/src/data/shard.ts
@@ -138,8 +138,8 @@ module.exports = {
             const info = getShardInfo(from);
             const { hasShard, isRed, lastEnd } = info;
             const { only } = opts;
-            
-            if (hasShard && from < lastEnd && (!only || (only === 'red') === isRed)) {
+
+            if (hasShard && from.toUTC() < lastEnd.toUTC() && (!only || (only === 'red') === isRed)) {
                 return info;
             } else {
                 return findNextShard(from.plus({ days: 1 }), { only });
@@ -197,8 +197,7 @@ module.exports = {
                 inline: true,
                 name: ["First", "Second", "Last"][i] + " shard",
                 value: `<t:${occurence.land.toUnixInteger()}:T> - <t:${occurence.end.toUnixInteger()}:T>`,
-            })))
-            .setFooter({ text: "Credits: PlutoyDev, Clement" });
+            })));
 
         const button = new ButtonBuilder()
         .setLabel("What's this?")

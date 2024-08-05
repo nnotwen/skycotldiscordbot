@@ -27,7 +27,7 @@ module.exports = {
             .setDescription(`**${moment.duration(elapsed, 'seconds').humanize()}** has passed since last reset. Next reset will be in **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`)
             .addFields(
                 { name: 'Maximum Rewards', value: `${63 * statueAC} Ascended Candles.`},
-                { name: 'Bonus Rewards', value: '0.5 Ascended Candles for not skipping ascension custcene.'}
+                { name: 'Bonus Rewards', value: '0.5 Ascended Candles for not skipping ascension cutscene.'}
             );
 
         const button = new ButtonBuilder()

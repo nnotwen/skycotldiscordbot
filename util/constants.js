@@ -133,7 +133,7 @@ exports.skyMaps = {
     "wasteland.ark": "Forgotten Ark",
     "vault.starlight": "Starlight Desert",
     "vault.jelly": "Jellyfish Cove"
-}
+};
 
 exports.mapVarients = {
     "prairie.butterfly.0": "On top of the dome",
@@ -175,4 +175,39 @@ exports.mapVarients = {
     "vault.starlight.2": "Right of rose garden",
     "vault.jelly.0": "Near the entrance",
     "vault.jelly.1": "Near the deck"
-}
+};
+
+exports.aviaryTimeCycle = {
+    baseImageURL: "https://static.wikia.nocookie.net/sky-children-of-the-light/images",
+    cycleInterval: { hours: 1, },
+    sunrise: {
+        name: "Sunrise",
+        offset: { },
+        duration: { minutes: 10, },
+        image: "6/6b/Aviary-Village-Sunrise.png",
+    },
+    fog: {
+        name: "Foggy",
+        offset: { minutes: 10, },
+        duration: { minutes: 5, },
+        image: "5/58/Aviary-Village-Fog.png",
+    },
+    daytime: {
+        name: "Daytime",
+        offset: { minutes: 15, },
+        duration: { minutes: 25, },
+        image: "a/aa/Aviary-Village-Daytime.png",
+    },
+    sunset: {
+        name: "Sunset",
+        offset: { minutes: 40, },
+        duration: { minutes: 10, },
+        image: "f/f7/Aviary-Village-Sunset.png",
+    },
+    night: {
+        name: "Nighttime",
+        offset: { minutes: 50, },
+        duration: { minutes: 10, },
+        image: "6/67/Aviary-Village-Nighttime.png",
+    },
+};

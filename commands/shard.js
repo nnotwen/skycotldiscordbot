@@ -36,7 +36,7 @@ module.exports = {
             .setColor(shard.isRed ? 0xd9544d : 0xafeeee)
             .setThumbnail(`https://raw.githubusercontent.com/PlutoyDev/sky-shards/production/public/infographics/map_clement/${shard.map}.webp`)
             .setTitle(`${shard.isRed ? 'Red' : 'Black'} Shard in ${skyRealms[shard.realm + '.long']}, ${skyMaps[shard.map]}`)
-            .setDescription(`${recent.index == 0 ? 'First' : recent.index == 1 ? 'Second' : 'Last'} shard ${recent.type === 'end' ? `landed **${moment.duration(recent.diffStart.seconds, 'seconds').humanize()} ago** and will end in` : 'will land in'} **${moment.duration(recent.diffEnd.seconds, 'seconds').humanize()}**.`)
+            .setDescription(`${recent.index == 0 ? 'First' : recent.index == 1 ? 'Second' : 'Last'} shard ${recent.type === 'end' ? `landed **${moment.duration(recent.diffStart.seconds, 'seconds').humanize()} ago** and will end in **${moment.duration(recent.diffEnd.seconds, 'seconds').humanize()}**.` : `will land in **${moment.duration(recent.diffStart.seconds, 'seconds').humanize()}**.`} `)
             .addFields(
                 { name: "Maximum Rewards", value: shard.isRed ? `${shard.rewardAC} Ascended Candles.` : `4 Candle Cakes worth of wax.`},
             )
@@ -50,7 +50,7 @@ module.exports = {
         .setLabel("What's this?")
         .setStyle(ButtonStyle.Link)
         .setURL('https://sky-children-of-the-light.fandom.com/wiki/Shard_Eruptions');
-        
+
         return interaction.reply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(button), ]});
     }
 }

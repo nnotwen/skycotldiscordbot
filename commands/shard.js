@@ -46,11 +46,16 @@ module.exports = {
                 value: `<t:${occurence.land.toUnixInteger()}:T> - <t:${occurence.end.toUnixInteger()}:T>`,
             })));
 
-        const button = new ButtonBuilder()
-        .setLabel("What's this?")
+        const button1 = new ButtonBuilder()
+        .setLabel("What's a shard eruption?")
         .setStyle(ButtonStyle.Link)
         .setURL('https://sky-children-of-the-light.fandom.com/wiki/Shard_Eruptions');
 
-        return interaction.reply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(button), ]});
+        const button2 = new ButtonBuilder()
+        .setLabel("More info")
+        .setStyle(ButtonStyle.Link)
+        .setURL(`https://sky-shards.pages.dev/en/${shard.date.toFormat('yyyy/LL/dd')}`);
+
+        return interaction.reply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(button1, button2), ]});
     }
 }

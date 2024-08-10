@@ -2,7 +2,7 @@
 
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, } = require('discord.js');
 const { DateTime } = require('luxon');
-const { skyMaps, skyRealms, } = require('../util/constants.js');
+const { skyMaps, skyRealms, Emoji, } = require('../util/constants.js');
 const { findNextShard, findNextLand } = require('../util/shardFinder.js');
 const moment = require('moment');
 
@@ -37,9 +37,12 @@ module.exports = {
             .setThumbnail(`https://raw.githubusercontent.com/PlutoyDev/sky-shards/production/public/infographics/map_clement/${shard.map}.webp`)
             .setTitle(`${shard.isRed ? 'Red' : 'Black'} Shard in ${skyRealms[shard.realm + '.long']}, ${skyMaps[shard.map]}`)
             .setDescription(`${recent.index == 0 ? 'First' : recent.index == 1 ? 'Second' : 'Last'} shard ${recent.type === 'end' ? `landed **${moment.duration(recent.diffStart.seconds, 'seconds').humanize()} ago** and will end in **${moment.duration(recent.diffEnd.seconds, 'seconds').humanize()}**.` : `will land in **${moment.duration(recent.diffStart.seconds, 'seconds').humanize()}**.`} `)
-            .addFields(
-                { name: "Maximum Rewards", value: shard.isRed ? `${shard.rewardAC} Ascended Candles.` : `4 Candle Cakes worth of wax.`},
-            )
+            .addFields({
+                    name: "Maximum Rewards",
+                    value: shard.isRed 
+                        ? `${Emoji.AscendedCandle}x ${shard.rewardAC}` 
+                        : `${Emoji.TreasureCandles}x 4 (*or ${Emoji.PieceOfLight}x 200*)`
+                },)
             .addFields(shard.occurences.map((occurence, i) => ({
                 inline: true,
                 name: ["First", "Second", "Last"][i] + " shard",

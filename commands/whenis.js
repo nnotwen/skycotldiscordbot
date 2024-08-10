@@ -2,7 +2,7 @@
 
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { DateTime, Duration } = require('luxon');
-const { timedEvents: evt } = require('../util/constants.js');
+const { timedEvents: evt, Emoji } = require('../util/constants.js');
 const moment = require('moment');
 
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
 
         const description = elapsed > 0
             ? `This event started **${moment.duration(Duration.fromObject(evt[subcommand].duration).minus({ seconds: elapsed }).as("seconds"), 'seconds').humanize()} ago** and will end in **${moment.duration(elapsed, 'seconds').humanize()}**.`
-            : `This event will start in about **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`;
+            : `This event will start in **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`;
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: evt[subcommand].type })
@@ -83,9 +83,20 @@ module.exports = {
             .setTitle(evt[subcommand].name)
             .setDescription(description)
             .setColor(0xafeeee).addFields(
-                { name: "Location", value: evt[subcommand].location, },
-                { name: "Maximum rewards on first attempt", value: evt[subcommand].maximumReward ? `${Number((evt[subcommand].maximumReward / 50).toFixed(2))} Candle Cakes worth of wax.` : "No rewards for this event.", },
-                { name: "Note", value: evt[subcommand].note, },
+                {
+                    name: "Location",
+                    value: evt[subcommand].location, 
+                },
+                {
+                    name: "Maximum rewards on first attempt",
+                    value: evt[subcommand].maximumReward 
+                        ? `${Emoji.TreasureCandles}x ${Number((evt[subcommand].maximumReward / 50).toFixed(2))} (*or ${Emoji.PieceOfLight}x ${evt[subcommand].maximumReward}*).` 
+                        : "No rewards for this event.", 
+                },
+                {
+                    name: "Note",
+                    value: evt[subcommand].note ?? "No additional note.",
+                },
             );
 
         if (subcommand === "fireworks" && !time.startOf('month').equals(date)){

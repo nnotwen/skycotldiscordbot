@@ -2,6 +2,7 @@
 
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { DateTime, Duration } = require('luxon');
+const { Emoji } = require('../util/constants.js');
 const moment = require('moment');
 
 module.exports = {
@@ -26,12 +27,17 @@ module.exports = {
             .setThumbnail('https://static.wikia.nocookie.net/sky-children-of-the-light/images/e/e5/Eden_2.png')
             .setDescription(`**${moment.duration(elapsed, 'seconds').humanize()}** has passed since last reset. Next reset will be in **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`)
             .addFields(
-                { name: 'Maximum Rewards', value: `${63 * statueAC} Ascended Candles.`},
-                { name: 'Bonus Rewards', value: '0.5 Ascended Candles for not skipping ascension cutscene.'}
+                { 
+                    name: 'Maximum Rewards',
+                    value: `${Emoji.AscendedCandle}x ${63 * statueAC}`
+                },
+                {
+                    name: 'Bonus Rewards',
+                    value: `${Emoji.AscendedCandle}x 0.5 for not skipping ascension cutscene.`}
             );
 
         const button = new ButtonBuilder()
-            .setLabel("What's this?")
+            .setLabel("What is Eye of Eden? (Spoiler Warning)")
             .setStyle(ButtonStyle.Link)
             .setURL('https://sky-children-of-the-light.fandom.com/wiki/Eye_of_Eden');
 

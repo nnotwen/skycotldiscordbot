@@ -1,3 +1,11 @@
+'use strict';
+
+exports.Emoji = {
+    AscendedCandle: "<:ascended_candle:1271811868864020571>",
+    TreasureCandles: "<:treasure_candles:1271811687820955728>",
+    PieceOfLight: "<:piece_of_light:1271810948444983450>",
+}
+
 exports.timedEvents = {
     reset: {
         name: 'Daily Reset',

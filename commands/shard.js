@@ -3,7 +3,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, } = require('discord.js');
 const { DateTime } = require('luxon');
 const { skyMaps, skyRealms, Emoji, } = require('../util/constants.js');
-const { findNextShard, findNextLand } = require('../util/shardFinder.js');
+const { findNextShard, findNextLand, getShardInfo } = require('../util/shardFinder.js');
 const moment = require('moment');
 
 module.exports = {
@@ -24,8 +24,8 @@ module.exports = {
         // https://github.com/PlutoyDev/sky-shards/blob/production/src/data/shard.ts
 
         const only = interaction.options.getString('type');
-        const shard = findNextShard(DateTime.now().setZone(process.env.TIME_ZONE), { only });
-        const recent = findNextLand(DateTime.now().setZone(process.env.TIME_ZONE), shard);
+        const shard = findNextShard(DateTime.now(), { only });
+        const recent = findNextLand(DateTime.now(), shard);
         const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
         const embed = new EmbedBuilder()

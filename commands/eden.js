@@ -3,6 +3,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { DateTime, Duration } = require('luxon');
 const { Emoji } = require('../util/constants.js');
+const { preciseRelativeTime: toHuman, } = require('../util/parser.js');
 const moment = require('moment');
 
 module.exports = {
@@ -25,7 +26,8 @@ module.exports = {
             .setTitle('Eye of Eden (Storm)')
             .setColor(0xd9544d)
             .setThumbnail('https://static.wikia.nocookie.net/sky-children-of-the-light/images/e/e5/Eden_2.png')
-            .setDescription(`**${moment.duration(elapsed, 'seconds').humanize()}** has passed since last reset. Next reset will be in **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`)
+            .setDescription(`**${moment.duration(elapsed, 'seconds').humanize()}** has passed since last reset. Next reset will be in **${toHuman(remaining)}**.`)
+            // .setDescription(`**${moment.duration(elapsed, 'seconds').humanize()}** has passed since last reset. Next reset will be in **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`)
             .addFields(
                 { 
                     name: 'Maximum Rewards',
@@ -46,14 +48,14 @@ module.exports = {
     }
 }
 
-function durationFormat(seconds){
-    if (seconds > 864e2){
-        return "d 'day(s),' h 'hour(s) and' m 'minute(s)'";
-    } else if (seconds > 36e2){
-        return "h 'hour(s) and' m 'minute(s)'";
-    } else if (seconds < 60) {
-        return "s 'second(s)'";
-    } else {
-        return "m 'minute(s)'"
-    };
-}
+// function durationFormat(seconds){
+//     if (seconds > 864e2){
+//         return "d 'day(s),' h 'hour(s) and' m 'minute(s)'";
+//     } else if (seconds > 36e2){
+//         return "h 'hour(s) and' m 'minute(s)'";
+//     } else if (seconds < 60) {
+//         return "s 'second(s)'";
+//     } else {
+//         return "m 'minute(s)'"
+//     };
+// }

@@ -3,6 +3,7 @@
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { DateTime, Duration } = require('luxon');
 const { timedEvents: evt, Emoji } = require('../util/constants.js');
+const { preciseRelativeTime: toHuman } = require('../util/parser.js');
 const moment = require('moment');
 
 module.exports = {
@@ -68,14 +69,16 @@ module.exports = {
         
         if (subcommand === "reset"){
             return interaction.reply({
-                content: `Sky clock will reset in about **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`,
+                content: `Sky Clock will reset in **${toHuman(seconds)}**.`,
+                // content: `Sky clock will reset in about **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`,
                 components: [ new ActionRowBuilder().addComponents(button), ],
             });
         };
 
         const description = elapsed > 0
             ? `This event started **${moment.duration(Duration.fromObject(evt[subcommand].duration).minus({ seconds: elapsed }).as("seconds"), 'seconds').humanize()} ago** and will end in **${moment.duration(elapsed, 'seconds').humanize()}**.`
-            : `This event will start in **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`;
+            : `This event will start in **${toHuman(seconds)}**.`
+            // : `This event will start in **${Duration.fromObject({ seconds }).toFormat(durationFormat(seconds))}**.`;
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: evt[subcommand].type })
@@ -101,7 +104,8 @@ module.exports = {
 
         if (subcommand === "fireworks" && !time.startOf('month').equals(date)){
             const remaining = time.endOf('month').diffNow().as('seconds');
-            embed.setDescription(`This event will start in about **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`);
+            embed.setDescription(`This event will start in **${toHuman(remaining)}**.`)
+            // embed.setDescription(`This event will start in about **${Duration.fromObject({ seconds: remaining }).toFormat(durationFormat(remaining))}**.`);
         };
 
         return interaction.reply({
@@ -111,14 +115,14 @@ module.exports = {
     }
 };
 
-function durationFormat(seconds){
-    if (seconds > 864e2){
-        return "d 'day(s),' h 'hour(s) and' m 'minute(s)'";
-    } else if (seconds > 36e2){
-        return "h 'hour(s) and' m 'minute(s)'";
-    } else if (seconds < 60) {
-        return "s 'second(s)'";
-    } else {
-        return "m 'minute(s)'"
-    };
-}
+// function durationFormat(seconds){
+//     if (seconds > 864e2){
+//         return "d 'day(s),' h 'hour(s) and' m 'minute(s)'";
+//     } else if (seconds > 36e2){
+//         return "h 'hour(s) and' m 'minute(s)'";
+//     } else if (seconds < 60) {
+//         return "s 'second(s)'";
+//     } else {
+//         return "m 'minute(s)'"
+//     };
+// }
